@@ -1039,8 +1039,6 @@ function DebugSystem:registerSubMenus()
         )
     end
 
-    -- TODO: toggle rather than only give
-
     self:registerMenu("give_spell", "Give Spell", "search")
 
     for id, _ in pairs(Registry.party_members) do
@@ -1485,7 +1483,11 @@ function DebugSystem:onStateChange(old, new)
         Kristal.showCursor()
     elseif new == "IDLE" then
         self:unselectObject()
-        self.menu_anim_timer = 0
+
+        if old ~= "IDLE" then
+            self.menu_anim_timer = 0
+        end
+
         OVERLAY_OPEN = false
 
         Kristal.hideCursor()

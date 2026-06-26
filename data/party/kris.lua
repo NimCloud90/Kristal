@@ -91,11 +91,13 @@ function character:init()
         }
     elseif Game.chapter == 3 then
         self.max_stats = {
-            health = 200
+            health = 200,
+            attack = 16
         }
     else
         self.max_stats = {
-            health = 240
+            health = 240,
+            attack = 19
         }
     end
 
@@ -184,7 +186,13 @@ function character:onPowerSelect(menu)
 end
 
 function character:drawPowerStat(index, x, y, menu)
-    if index == 1 and menu.kris_dog then
+    local dog_index = 1
+
+    if Game.chapter == 4 then
+        dog_index = 2
+    end
+
+    if index == dog_index and menu.kris_dog then
         local frames = Assets.getFrames("misc/dog_sleep")
         local frame = math.floor(Kristal.getTime()) % #frames + 1
         love.graphics.print("Dog:", x, y)
